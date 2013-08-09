@@ -292,8 +292,8 @@ Context(method) -> Context instance\n\
 OpenSSL.SSL.Context instances define the parameters for setting up new SSL\n\
 connections.\n\
 \n\
-:param method: One of " SSLv2_METHOD_TEXT "SSLv3_METHOD, SSLv23_METHOD, or\n\
-               TLSv1_METHOD.\n\
+:param method: One of " SSLv2_METHOD_TEXT "SSLv3_METHOD, SSLv23_METHOD,\n\
+               TLSv1_METHOD, TLSv1_1_METHOD, OR TLSv1_2_METHOD.\n\
 ";
 
 #undef SSLv2_METHOD_TEXT
@@ -1261,6 +1261,12 @@ ssl_Context_init(ssl_ContextObj *self, int i_method) {
             break;
         case ssl_TLSv1_METHOD:
             method = TLSv1_method();
+            break;
+        case ssl_TLSv1_1_METHOD:
+            method = TLSv1_1_method();
+            break;
+        case ssl_TLSv1_2_METHOD:
+            method = TLSv1_2_method();
             break;
         default:
             PyErr_SetString(PyExc_ValueError, "No such protocol");
